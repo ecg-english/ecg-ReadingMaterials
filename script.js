@@ -1,10 +1,48 @@
 // Vocabulary highlighting functionality
 document.addEventListener('DOMContentLoaded', () => {
+    initializeAccordion();
     initializeVocabularyHighlighting();
     initializeGrammarHighlighting();
     initializeSmoothScrolling();
     initializeInkEffect();
 });
+
+// Initialize accordion functionality
+function initializeAccordion() {
+    const accordionToggles = document.querySelectorAll('.accordion-toggle');
+    
+    accordionToggles.forEach(toggle => {
+        toggle.addEventListener('click', function() {
+            const content = this.nextElementSibling;
+            const isActive = this.classList.contains('active');
+            
+            // Close all accordions first if needed, or toggle just this one
+            if (!isActive) {
+                // Close other accordions (optional - remove if you want multiple open)
+                accordionToggles.forEach(otherToggle => {
+                    if (otherToggle !== this && otherToggle.classList.contains('active')) {
+                        otherToggle.classList.remove('active');
+                        otherToggle.nextElementSibling.classList.remove('active');
+                    }
+                });
+                
+                // Open this accordion
+                this.classList.add('active');
+                content.classList.add('active');
+            } else {
+                // Close this accordion
+                this.classList.remove('active');
+                content.classList.remove('active');
+            }
+        });
+    });
+    
+    // Open first section by default
+    if (accordionToggles.length > 0) {
+        accordionToggles[0].classList.add('active');
+        accordionToggles[0].nextElementSibling.classList.add('active');
+    }
+}
 
 // Vocabulary highlighting
 function initializeVocabularyHighlighting() {
@@ -320,65 +358,6 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Add intersection observer for scroll animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-// Observe all sections
-document.querySelectorAll('.section').forEach(section => {
-    section.style.opacity = '0';
-    section.style.transform = 'translateY(30px)';
-    section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-    observer.observe(section);
-});
-
-// Easter egg: Double click on title to add a decorative element
-document.querySelector('.title').addEventListener('dblclick', function() {
-    this.style.textShadow = '2px 2px 4px rgba(212, 175, 55, 0.5)';
-    this.style.transform = 'scale(1.05)';
-    this.style.transition = 'all 0.3s ease';
-    
-    setTimeout(() => {
-        this.style.transform = 'scale(1)';
-    }, 300);
-});
-
-// Add page turn effect simulation
-let lastScrollTop = 0;
-window.addEventListener('scroll', () => {
-    const st = window.pageYOffset || document.documentElement.scrollTop;
-    const page = document.querySelector('.page');
-    
-    if (st > lastScrollTop) {
-        // Scrolling down
-        page.style.transform = 'rotateX(1deg) rotateY(-0.5deg)';
-    } else {
-        // Scrolling up
-        page.style.transform = 'rotateX(-1deg) rotateY(0.5deg)';
-    }
-    
-    lastScrollTop = st <= 0 ? 0 : st;
-}, false);
-
-// Reset page transform when scroll stops
-let scrollTimeout;
-window.addEventListener('scroll', () => {
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-        document.querySelector('.page').style.transform = 'rotateX(2deg) rotateY(-1deg)';
-    }, 150);
-});
 
 console.log('📚 ECG Reading Materials loaded successfully!');
 console.log('💡 Tip: Click on vocabulary or grammar items to see them highlighted in the text!');
