@@ -44,6 +44,32 @@ function initializeAccordion() {
     }
 }
 
+// Function to open a specific accordion section by ID
+function openAccordionSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+    
+    const toggle = section.querySelector('.accordion-toggle');
+    const content = section.querySelector('.accordion-content');
+    
+    if (toggle && content) {
+        // Check if already open
+        if (!toggle.classList.contains('active')) {
+            // Close other accordions if needed (optional - remove if you want multiple open)
+            document.querySelectorAll('.accordion-toggle').forEach(otherToggle => {
+                if (otherToggle !== toggle && otherToggle.classList.contains('active')) {
+                    otherToggle.classList.remove('active');
+                    otherToggle.nextElementSibling.classList.remove('active');
+                }
+            });
+            
+            // Open this accordion
+            toggle.classList.add('active');
+            content.classList.add('active');
+        }
+    }
+}
+
 // Vocabulary highlighting
 function initializeVocabularyHighlighting() {
     const vocabItems = document.querySelectorAll('.vocab-item');
@@ -52,14 +78,20 @@ function initializeVocabularyHighlighting() {
         item.addEventListener('click', function() {
             const highlightWord = this.getAttribute('data-highlight');
             
+            // Ensure Original Text section is open
+            openAccordionSection('original-text');
+            
             // Remove previous highlights
             removeAllHighlights();
             
             // Add highlight to vocab item
             this.classList.add('highlight-active');
             
-            // Highlight word in original text
-            highlightWordInText(highlightWord);
+            // Small delay to ensure accordion animation completes before highlighting
+            setTimeout(() => {
+                // Highlight word in original text
+                highlightWordInText(highlightWord);
+            }, 100);
             
             // Remove highlight after animation
             setTimeout(() => {
@@ -87,14 +119,20 @@ function initializeGrammarHighlighting() {
         item.addEventListener('click', function() {
             const highlightPhrase = this.getAttribute('data-highlight');
             
+            // Ensure Original Text section is open
+            openAccordionSection('original-text');
+            
             // Remove previous highlights
             removeAllHighlights();
             
             // Add highlight to grammar item
             this.classList.add('highlight-active');
             
-            // Highlight phrase in original text
-            highlightPhraseInText(highlightPhrase);
+            // Small delay to ensure accordion animation completes before highlighting
+            setTimeout(() => {
+                // Highlight phrase in original text
+                highlightPhraseInText(highlightPhrase);
+            }, 100);
             
             // Remove highlight after animation
             setTimeout(() => {
@@ -143,9 +181,10 @@ function highlightWordInText(word) {
     
     // Scroll to first match
     if (firstMatch) {
+        // Wait a bit longer to ensure accordion is fully open
         setTimeout(() => {
             firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 100);
+        }, 300);
         
         // Remove highlight after animation
         setTimeout(() => {
@@ -209,9 +248,10 @@ function highlightPhraseInText(phraseKey) {
     
     // Scroll to match
     if (firstMatch) {
+        // Wait a bit longer to ensure accordion is fully open
         setTimeout(() => {
             firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 100);
+        }, 300);
         
         // Remove highlight after animation
         setTimeout(() => {
