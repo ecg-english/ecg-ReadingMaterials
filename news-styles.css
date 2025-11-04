@@ -1,0 +1,533 @@
+/* Import modern news fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f5f7fa;
+    padding: 2rem;
+    min-height: 100vh;
+    line-height: 1.7;
+    color: #1a1a1a;
+}
+
+/* News Container */
+.news-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Page Styling - Clean News Style */
+.page {
+    background: #ffffff;
+    padding: 3rem 4rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 0;
+    position: relative;
+    border-top: 4px solid #2563eb;
+}
+
+/* Header */
+.page-header {
+    text-align: left;
+    margin-bottom: 3rem;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 2rem;
+}
+
+.title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
+
+.divider {
+    width: 80px;
+    height: 3px;
+    background: #2563eb;
+    margin: 1rem 0;
+}
+
+.subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.author {
+    font-size: 0.9rem;
+    color: #64748b;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Sections */
+.section {
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+}
+
+.section-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e5e7eb;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.875rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 60px;
+    height: 2px;
+    background: #2563eb;
+}
+
+/* Accordion Toggle */
+.accordion-toggle {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease;
+    padding: 0.75rem 0;
+}
+
+.accordion-toggle:hover {
+    background-color: #f8fafc;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+    border-radius: 4px;
+}
+
+.toggle-icon {
+    font-size: 0.875rem;
+    transition: transform 0.3s ease;
+    color: #2563eb;
+    font-weight: 600;
+}
+
+.accordion-toggle.active .toggle-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+}
+
+.accordion-content.active {
+    max-height: 10000px;
+    transition: max-height 0.6s ease-in;
+}
+
+/* Original Text */
+.text-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #334155;
+}
+
+.verse {
+    margin-bottom: 1rem;
+    padding-left: 0;
+}
+
+/* Translation */
+.translation-content {
+    font-size: 1.05rem;
+    color: #475569;
+}
+
+.translation-item {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.translation-item:last-child {
+    border-bottom: none;
+}
+
+.original-english {
+    font-size: 0.95rem;
+    color: #64748b;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+.translation-item p:not(.original-english) {
+    margin-bottom: 0;
+    line-height: 1.8;
+    color: #1e293b;
+}
+
+/* Vocabulary */
+.vocabulary-list {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.vocab-item {
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-left: 4px solid #2563eb;
+    border-radius: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.vocab-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+    background: #f1f5f9;
+}
+
+.vocab-item.highlight-active {
+    animation: highlightPulse 1s ease-in-out;
+    border-left-color: #f59e0b;
+    background: #fffbeb;
+}
+
+@keyframes highlightPulse {
+    0%, 100% {
+        transform: translateX(0);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    50% {
+        transform: translateX(10px);
+        box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
+    }
+}
+
+.vocab-word {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1e293b;
+    font-family: 'Inter', sans-serif;
+}
+
+.vocab-phonetic {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-left: 1rem;
+    font-style: italic;
+}
+
+.vocab-meaning,
+.vocab-example,
+.vocab-note {
+    margin-top: 0.8rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.vocab-meaning strong,
+.vocab-example strong,
+.vocab-note strong {
+    color: #334155;
+    font-weight: 600;
+}
+
+.vocab-note {
+    font-style: italic;
+    color: #64748b;
+}
+
+/* Grammar */
+.grammar-list {
+    display: grid;
+    gap: 2rem;
+}
+
+.grammar-item {
+    padding: 2rem;
+    background: #f8fafc;
+    border: 2px solid #e5e7eb;
+    border-radius: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.grammar-item:hover {
+    border-color: #2563eb;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+    background: #f1f5f9;
+}
+
+.grammar-item.highlight-active {
+    animation: grammarHighlight 1.2s ease-in-out;
+    border-color: #f59e0b;
+    background: #fffbeb;
+}
+
+@keyframes grammarHighlight {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    50% {
+        transform: scale(1.01);
+        box-shadow: 0 8px 24px rgba(245, 158, 11, 0.2);
+    }
+}
+
+.grammar-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 1rem;
+}
+
+.grammar-content {
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.grammar-content p {
+    margin-bottom: 1rem;
+}
+
+.grammar-content ul {
+    margin-left: 2rem;
+    margin-top: 0.5rem;
+}
+
+.grammar-content li {
+    margin-bottom: 0.5rem;
+}
+
+.grammar-content strong {
+    color: #334155;
+    font-weight: 600;
+}
+
+.grammar-example {
+    font-style: italic;
+    color: #64748b;
+    margin-top: 0.8rem;
+    padding-left: 1rem;
+    border-left: 3px solid #2563eb;
+}
+
+.grammar-content em {
+    background: linear-gradient(180deg, transparent 60%, rgba(245, 158, 11, 0.2) 60%);
+    font-style: italic;
+    padding: 0 2px;
+}
+
+/* Commentary */
+.commentary-content {
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.commentary-section {
+    margin-bottom: 2.5rem;
+}
+
+.commentary-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.commentary-subtitle::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #2563eb;
+    font-size: 1.2rem;
+}
+
+.commentary-content p {
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+.commentary-content ul {
+    margin-left: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.commentary-content li {
+    margin-bottom: 0.8rem;
+}
+
+.commentary-content strong {
+    color: #334155;
+    font-weight: 600;
+}
+
+.commentary-content em {
+    background: linear-gradient(180deg, transparent 65%, rgba(37, 99, 235, 0.15) 65%);
+    font-style: italic;
+    padding: 0 2px;
+}
+
+/* Highlight Effects in Original Text */
+.verse.highlight-word {
+    animation: wordGlow 1s ease-in-out;
+    background: linear-gradient(to right, 
+        transparent, 
+        rgba(245, 158, 11, 0.15), 
+        transparent
+    );
+}
+
+@keyframes wordGlow {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.highlight-text {
+    position: relative;
+    display: inline-block;
+    animation: textHighlight 1s ease-in-out;
+}
+
+@keyframes textHighlight {
+    0% {
+        background: transparent;
+        color: inherit;
+        box-shadow: none;
+        transform: scale(1);
+    }
+    50% {
+        background: linear-gradient(180deg, transparent 0%, rgba(245, 158, 11, 0.6) 0%, rgba(245, 158, 11, 0.6) 100%, transparent 100%);
+        color: #92400e;
+        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        transform: scale(1.03);
+    }
+    100% {
+        background: linear-gradient(180deg, transparent 0%, rgba(245, 158, 11, 0.4) 0%, rgba(245, 158, 11, 0.4) 100%, transparent 100%);
+        color: #b45309;
+        box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+        transform: scale(1);
+    }
+}
+
+.highlight-text {
+    background: linear-gradient(180deg, transparent 0%, rgba(245, 158, 11, 0.4) 0%, rgba(245, 158, 11, 0.4) 100%, transparent 100%);
+    color: #b45309;
+    font-weight: 600;
+    padding: 2px 4px;
+    border-radius: 2px;
+    animation: textHighlight 1s ease-in-out;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+/* Footer */
+.page-footer {
+    margin-top: 4rem;
+    text-align: center;
+    color: #64748b;
+    font-size: 0.875rem;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 2rem;
+}
+
+.page-footer .divider {
+    display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    .page {
+        padding: 2rem 1.5rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 0.75rem;
+    }
+
+    .text-content {
+        font-size: 1rem;
+    }
+
+    .vocab-word {
+        font-size: 1.1rem;
+    }
+
+    .grammar-item,
+    .vocab-item {
+        padding: 1rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+
+    .page {
+        box-shadow: none;
+        padding: 2rem;
+        border-top: none;
+    }
+
+    .page::before,
+    .page::after {
+        display: none;
+    }
+
+    .section {
+        page-break-inside: avoid;
+    }
+}
+
