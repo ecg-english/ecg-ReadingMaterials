@@ -1,0 +1,539 @@
+/* Import philosophical fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+Pro:wght@400;600;700&display=swap');
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Source Serif Pro', 'Times New Roman', serif;
+    background: #1a1a1a;
+    padding: 2rem;
+    min-height: 100vh;
+    line-height: 1.9;
+    color: #e8e8e8;
+}
+
+/* Philosophy Container */
+.philosophy-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Page Styling - Deep Philosophical Style */
+.page {
+    background: #2d2d2d;
+    padding: 4rem 5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    border-radius: 0;
+    position: relative;
+    border-left: 4px solid #8b7355;
+    border-top: 1px solid #3d3d3d;
+}
+
+/* Header */
+.page-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    border-bottom: 1px solid #4a4a4a;
+    padding-bottom: 2rem;
+}
+
+.title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 600;
+    color: #d4af37;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.divider {
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #8b7355, transparent);
+    margin: 1.5rem auto;
+}
+
+.subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #c9c9c9;
+    margin-bottom: 0.5rem;
+    font-style: italic;
+    letter-spacing: 0.02em;
+}
+
+.author {
+    font-size: 0.95rem;
+    color: #8b7355;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* Sections */
+.section {
+    margin-bottom: 4rem;
+    position: relative;
+    z-index: 1;
+}
+
+.section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #d4af37;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #4a4a4a;
+    position: relative;
+    letter-spacing: 0.05em;
+}
+
+.section-title::after {
+    content: '◆';
+    position: absolute;
+    right: 0;
+    bottom: -0.5rem;
+    font-size: 0.8rem;
+    color: #8b7355;
+}
+
+/* Accordion Toggle */
+.accordion-toggle {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    padding: 1rem 0;
+}
+
+.accordion-toggle:hover {
+    background-color: rgba(139, 115, 85, 0.1);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    border-radius: 2px;
+}
+
+.toggle-icon {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+    color: #8b7355;
+    font-weight: 400;
+}
+
+.accordion-toggle.active .toggle-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+}
+
+.accordion-content.active {
+    max-height: 10000px;
+    transition: max-height 0.6s ease-in;
+}
+
+/* Original Text */
+.text-content {
+    font-size: 1.15rem;
+    line-height: 2.2;
+    color: #e8e8e8;
+    text-align: justify;
+}
+
+.verse {
+    margin-bottom: 1.5rem;
+    padding-left: 0;
+    padding-right: 2rem;
+}
+
+/* Translation */
+.translation-content {
+    font-size: 1.05rem;
+    color: #d4d4d4;
+}
+
+.translation-item {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #3d3d3d;
+}
+
+.translation-item:last-child {
+    border-bottom: none;
+}
+
+.original-english {
+    font-size: 1rem;
+    color: #8b7355;
+    font-style: italic;
+    margin-bottom: 0.8rem;
+    line-height: 1.8;
+    font-weight: 400;
+}
+
+.translation-item p:not(.original-english) {
+    margin-bottom: 0;
+    line-height: 2;
+    color: #e8e8e8;
+}
+
+/* Vocabulary */
+.vocabulary-list {
+    display: grid;
+    gap: 2rem;
+}
+
+.vocab-item {
+    padding: 2rem;
+    background: #252525;
+    border-left: 4px solid #8b7355;
+    border-radius: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.vocab-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 16px rgba(139, 115, 85, 0.4);
+    background: #2a2a2a;
+}
+
+.vocab-item.highlight-active {
+    animation: highlightPulse 1s ease-in-out;
+    border-left-color: #d4af37;
+    background: #2f2a1f;
+}
+
+@keyframes highlightPulse {
+    0%, 100% {
+        transform: translateX(0);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+        transform: translateX(10px);
+        box-shadow: 0 8px 24px rgba(212, 175, 55, 0.5);
+    }
+}
+
+.vocab-word {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #d4af37;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.vocab-phonetic {
+    font-size: 0.95rem;
+    color: #8b7355;
+    margin-left: 1rem;
+    font-style: italic;
+}
+
+.vocab-meaning,
+.vocab-example,
+.vocab-note {
+    margin-top: 1rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.vocab-meaning strong,
+.vocab-example strong,
+.vocab-note strong {
+    color: #c9c9c9;
+    font-weight: 600;
+}
+
+.vocab-note {
+    font-style: italic;
+    color: #8b7355;
+}
+
+/* Grammar */
+.grammar-list {
+    display: grid;
+    gap: 2.5rem;
+}
+
+.grammar-item {
+    padding: 2.5rem;
+    background: #252525;
+    border: 1px solid #3d3d3d;
+    border-radius: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.grammar-item:hover {
+    border-color: #8b7355;
+    box-shadow: 0 4px 16px rgba(139, 115, 85, 0.3);
+    background: #2a2a2a;
+}
+
+.grammar-item.highlight-active {
+    animation: grammarHighlight 1.2s ease-in-out;
+    border-color: #d4af37;
+    background: #2f2a1f;
+}
+
+@keyframes grammarHighlight {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+        transform: scale(1.01);
+        box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
+    }
+}
+
+.grammar-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #d4af37;
+    margin-bottom: 1.2rem;
+}
+
+.grammar-content {
+    font-size: 1.05rem;
+    line-height: 1.9;
+}
+
+.grammar-content p {
+    margin-bottom: 1.2rem;
+}
+
+.grammar-content ul {
+    margin-left: 2.5rem;
+    margin-top: 0.8rem;
+}
+
+.grammar-content li {
+    margin-bottom: 0.8rem;
+}
+
+.grammar-content strong {
+    color: #c9c9c9;
+    font-weight: 600;
+}
+
+.grammar-example {
+    font-style: italic;
+    color: #8b7355;
+    margin-top: 1rem;
+    padding-left: 1.5rem;
+    border-left: 3px solid #8b7355;
+}
+
+.grammar-content em {
+    background: linear-gradient(180deg, transparent 60%, rgba(212, 175, 55, 0.2) 60%);
+    font-style: italic;
+    padding: 0 2px;
+}
+
+/* Commentary */
+.commentary-content {
+    font-size: 1.1rem;
+    line-height: 2;
+}
+
+.commentary-section {
+    margin-bottom: 3rem;
+}
+
+.commentary-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #d4af37;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-left: 2rem;
+}
+
+.commentary-subtitle::before {
+    content: '◈';
+    position: absolute;
+    left: 0;
+    color: #8b7355;
+    font-size: 1.2rem;
+}
+
+.commentary-content p {
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+.commentary-content ul {
+    margin-left: 2.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.commentary-content li {
+    margin-bottom: 1rem;
+}
+
+.commentary-content strong {
+    color: #d4af37;
+    font-weight: 600;
+}
+
+.commentary-content em {
+    background: linear-gradient(180deg, transparent 65%, rgba(139, 115, 85, 0.3) 65%);
+    font-style: italic;
+    padding: 0 2px;
+}
+
+/* Highlight Effects in Original Text */
+.verse.highlight-word {
+    animation: wordGlow 1s ease-in-out;
+    background: linear-gradient(to right, 
+        transparent, 
+        rgba(212, 175, 55, 0.15), 
+        transparent
+    );
+}
+
+@keyframes wordGlow {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.highlight-text {
+    position: relative;
+    display: inline-block;
+    animation: textHighlight 1s ease-in-out;
+}
+
+@keyframes textHighlight {
+    0% {
+        background: transparent;
+        color: inherit;
+        box-shadow: none;
+        transform: scale(1);
+    }
+    50% {
+        background: linear-gradient(180deg, transparent 0%, rgba(212, 175, 55, 0.6) 0%, rgba(212, 175, 55, 0.6) 100%, transparent 100%);
+        color: #f5e6a8;
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.5);
+        transform: scale(1.03);
+    }
+    100% {
+        background: linear-gradient(180deg, transparent 0%, rgba(212, 175, 55, 0.4) 0%, rgba(212, 175, 55, 0.4) 100%, transparent 100%);
+        color: #d4af37;
+        box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+        transform: scale(1);
+    }
+}
+
+.highlight-text {
+    background: linear-gradient(180deg, transparent 0%, rgba(212, 175, 55, 0.4) 0%, rgba(212, 175, 55, 0.4) 100%, transparent 100%);
+    color: #d4af37;
+    font-weight: 600;
+    padding: 2px 4px;
+    border-radius: 2px;
+    animation: textHighlight 1s ease-in-out;
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+}
+
+/* Footer */
+.page-footer {
+    margin-top: 5rem;
+    text-align: center;
+    color: #8b7355;
+    font-size: 0.9rem;
+    border-top: 1px solid #3d3d3d;
+    padding-top: 2rem;
+}
+
+.page-footer .divider {
+    display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+        background: #1a1a1a;
+    }
+
+    .page {
+        padding: 2rem 1.5rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1.4rem;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+    }
+
+    .text-content {
+        font-size: 1rem;
+    }
+
+    .vocab-word {
+        font-size: 1.2rem;
+    }
+
+    .grammar-item,
+    .vocab-item {
+        padding: 1.5rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: white;
+        padding: 0;
+        color: #000;
+    }
+
+    .page {
+        box-shadow: none;
+        padding: 2rem;
+        border-left: none;
+        border-top: none;
+        background: white;
+    }
+
+    .page::before,
+    .page::after {
+        display: none;
+    }
+
+    .section {
+        page-break-inside: avoid;
+    }
+}
+
