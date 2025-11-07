@@ -161,6 +161,12 @@ body {
     padding-right: 2rem;
 }
 
+/* List items in verse (for bullet points) */
+.verse.list-item {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+}
+
 /* Translation */
 .translation-content {
     font-size: 1.05rem;
@@ -501,6 +507,7 @@ body {
 
     .text-content {
         font-size: 1rem;
+        text-align: left;
     }
 
     .vocab-word {
